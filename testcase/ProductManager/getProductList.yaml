@@ -16,3 +16,10 @@
       extract_list:
 #        token: '"token": "(.*?)"'
         goodsId: $.goodsList[*].goodsId
+    - case_name: 获取商品列表分页第二页
+      params:
+        msgType: getHandsetListOfCust
+        page: 2
+        size: 10
+      validation:
+        - contains: { 'error_code': '0000' }
