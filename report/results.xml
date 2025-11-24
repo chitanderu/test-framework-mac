@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="19" time="0.138" timestamp="2025-11-24T16:18:35.963693+08:00" hostname="KdeMacBook-Air.local"><testcase classname="testcase.Business interface.test_business_scenario.TestEBusinessScenario" name="test_business_scenario[case_info0]" time="0.013" /><testcase classname="testcase.Business interface.test_business_scenario.TestEBusinessScenario" name="test_business_scenario[case_info1]" time="0.006" /><testcase classname="testcase.Business interface.test_business_scenario.TestEBusinessScenario" name="test_business_scenario[case_info2]" time="0.004" /><testcase classname="testcase.Business interface.test_business_scenario.TestEBusinessScenario" name="test_business_scenario[case_info3]" time="0.005" /><testcase classname="testcase.Business interface.test_business_scenario.TestEBusinessScenario" name="test_business_scenario[case_info4]" time="0.004" /><testcase classname="testcase.ProductManager.test_productList.TestLogin" name="test_get_product_list[base_info0-testcase0]" time="0.004" /><testcase classname="testcase.ProductManager.test_productList.TestLogin" name="test_get_product_detail[base_info0-testcase0]" time="0.004" /><testcase classname="testcase.ProductManager.test_productList.TestLogin" name="test_commit_order[base_info0-testcase0]" time="0.004" /><testcase classname="testcase.ProductManager.test_productList.TestLogin" name="test_order_pay[base_info0-testcase0]" time="0.005" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_add_user[base_info0-testcase0]" time="0.006"><failure message="requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)">self = &lt;Response [500]&gt;, kwargs = {}
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="22" time="0.234" timestamp="2025-11-25T00:04:31.534998+08:00" hostname="KdeMacBook-Air.local"><testcase classname="testcase.Business interface.test_business_scenario.TestEBusinessScenario" name="test_business_scenario[case_info0]" time="0.033" /><testcase classname="testcase.Business interface.test_business_scenario.TestEBusinessScenario" name="test_business_scenario[case_info1]" time="0.008" /><testcase classname="testcase.Business interface.test_business_scenario.TestEBusinessScenario" name="test_business_scenario[case_info2]" time="0.004" /><testcase classname="testcase.Business interface.test_business_scenario.TestEBusinessScenario" name="test_business_scenario[case_info3]" time="0.006" /><testcase classname="testcase.Business interface.test_business_scenario.TestEBusinessScenario" name="test_business_scenario[case_info4]" time="0.004" /><testcase classname="testcase.ProductManager.test_productList.TestLogin" name="test_get_product_list[base_info0-testcase0]" time="0.005" /><testcase classname="testcase.ProductManager.test_productList.TestLogin" name="test_get_product_detail[base_info0-testcase0]" time="0.004" /><testcase classname="testcase.ProductManager.test_productList.TestLogin" name="test_commit_order[base_info0-testcase0]" time="0.004" /><testcase classname="testcase.ProductManager.test_productList.TestLogin" name="test_order_pay[base_info0-testcase0]" time="0.006" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_add_user[base_info0-testcase0]" time="0.007"><failure message="requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)">self = &lt;Response [500]&gt;, kwargs = {}
 
     def json(self, **kwargs):
         r"""Returns the json-encoded content of a response, if any.
@@ -37,7 +37,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
     obj, end = self.raw_decode(s, idx=_w(s, 0).end())
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;json.decoder.JSONDecoder object at 0x104d9ea50&gt;
+self = &lt;json.decoder.JSONDecoder object at 0x10504ea50&gt;
 s = "&lt;!doctype html&gt;\n&lt;html lang=en&gt;\n  &lt;head&gt;\n    &lt;title&gt;FileNotFoundError: [Errno 2] No such file or directory: &amp;#39;.....^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '../data/mockdata/userManage.json'\n\n\n--&gt;\n"
 idx = 0
 
@@ -60,7 +60,126 @@ E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char
 
 During handling of the above exception, another exception occurred:
 
-self = &lt;test_debug_api.TestUserManager object at 0x10c220190&gt;
+self = &lt;test_debug_api.TestUserManager object at 0x10c510190&gt;
+base_info = {'api_name': '新增用户', 'header': {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}, 'method': 'POST', 'url': '/dar/user/addUser'}
+testcase = {'data': {'dates': '2023-12-31', 'password': 'tset6789890', 'phone': 13800000001, 'role_id': 123456789, ...}}
+
+    @allure.story(next(c_id) + "新增用户")
+    # 测试用例执行顺序设置
+    @pytest.mark.run(order=1)
+    # 参数化，yaml数据驱动
+    @pytest.mark.parametrize('base_info,testcase', get_testcase_yaml("./testcase/Single interface/addUser.yaml"))
+    def test_add_user(self, base_info, testcase):
+        allure.dynamic.title(testcase['case_name'])
+&gt;       RequestBase().specification_yaml(base_info, testcase)
+
+testcase/Single interface/test_debug_api.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+base/apiutil.py:119: in specification_yaml
+    raise e
+base/apiutil.py:101: in specification_yaml
+    allure.attach(self.allure_attach_response(res.json()), '接口响应信息', allure.attachment_type.TEXT)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;Response [500]&gt;, kwargs = {}
+
+    def json(self, **kwargs):
+        r"""Returns the json-encoded content of a response, if any.
+    
+        :param \*\*kwargs: Optional arguments that ``json.loads`` takes.
+        :raises requests.exceptions.JSONDecodeError: If the response body does not
+            contain valid json.
+        """
+    
+        if not self.encoding and self.content and len(self.content) &gt; 3:
+            # No encoding set. JSON RFC 4627 section 3 states we should expect
+            # UTF-8, -16 or -32. Detect which one to use; If the detection or
+            # decoding fails, fall back to `self.text` (using charset_normalizer to make
+            # a best guess).
+            encoding = guess_json_utf(self.content)
+            if encoding is not None:
+                try:
+                    return complexjson.loads(self.content.decode(encoding), **kwargs)
+                except UnicodeDecodeError:
+                    # Wrong UTF codec detected; usually because it's not UTF-8
+                    # but some other 8-bit codec.  This is an RFC violation,
+                    # and the server didn't bother to tell us what codec *was*
+                    # used.
+                    pass
+                except JSONDecodeError as e:
+                    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+    
+        try:
+            return complexjson.loads(self.text, **kwargs)
+        except JSONDecodeError as e:
+            # Catch JSON-related errors and raise as requests.JSONDecodeError
+            # This aliases json.JSONDecodeError and simplejson.JSONDecodeError
+&gt;           raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+E           requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+.venv/lib/python3.14/site-packages/requests/models.py:978: JSONDecodeError</failure></testcase><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_add_user[base_info1-testcase1]" time="0.006"><failure message="requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)">self = &lt;Response [500]&gt;, kwargs = {}
+
+    def json(self, **kwargs):
+        r"""Returns the json-encoded content of a response, if any.
+    
+        :param \*\*kwargs: Optional arguments that ``json.loads`` takes.
+        :raises requests.exceptions.JSONDecodeError: If the response body does not
+            contain valid json.
+        """
+    
+        if not self.encoding and self.content and len(self.content) &gt; 3:
+            # No encoding set. JSON RFC 4627 section 3 states we should expect
+            # UTF-8, -16 or -32. Detect which one to use; If the detection or
+            # decoding fails, fall back to `self.text` (using charset_normalizer to make
+            # a best guess).
+            encoding = guess_json_utf(self.content)
+            if encoding is not None:
+                try:
+                    return complexjson.loads(self.content.decode(encoding), **kwargs)
+                except UnicodeDecodeError:
+                    # Wrong UTF codec detected; usually because it's not UTF-8
+                    # but some other 8-bit codec.  This is an RFC violation,
+                    # and the server didn't bother to tell us what codec *was*
+                    # used.
+                    pass
+                except JSONDecodeError as e:
+                    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+    
+        try:
+&gt;           return complexjson.loads(self.text, **kwargs)
+
+.venv/lib/python3.14/site-packages/requests/models.py:974: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.14.0-macos-aarch64-none/lib/python3.14/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+../../.local/share/uv/python/cpython-3.14.0-macos-aarch64-none/lib/python3.14/json/decoder.py:345: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;json.decoder.JSONDecoder object at 0x10504ea50&gt;
+s = "&lt;!doctype html&gt;\n&lt;html lang=en&gt;\n  &lt;head&gt;\n    &lt;title&gt;FileNotFoundError: [Errno 2] No such file or directory: &amp;#39;.....^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '../data/mockdata/userManage.json'\n\n\n--&gt;\n"
+idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+&gt;           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+../../.local/share/uv/python/cpython-3.14.0-macos-aarch64-none/lib/python3.14/json/decoder.py:363: JSONDecodeError
+
+During handling of the above exception, another exception occurred:
+
+self = &lt;test_debug_api.TestUserManager object at 0x10c5102d0&gt;
 base_info = {'api_name': '新增用户', 'header': {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}, 'method': 'POST', 'url': '/dar/user/addUser'}
 testcase = {'data': {'dates': '2023-12-31', 'password': 'tset6789890', 'phone': 13800000000, 'role_id': 123456789, ...}}
 
@@ -117,4 +236,192 @@ self = &lt;Response [500]&gt;, kwargs = {}
 &gt;           raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
 E           requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 
-.venv/lib/python3.14/site-packages/requests/models.py:978: JSONDecodeError</failure></testcase><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_add_user[base_info1-testcase1]" time="0.003" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_add_user[base_info2-testcase2]" time="0.003" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_add_user[base_info3-testcase3]" time="0.004" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_update_user[base_info0-testcase0]" time="0.003" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_delete_user[base_info0-testcase0]" time="0.003" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_delete_user[base_info1-testcase1]" time="0.003" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_delete_user[base_info2-testcase2]" time="0.003" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_delete_user[base_info3-testcase3]" time="0.003" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_query_user[base_info0-testcase0]" time="0.003" /></testsuite></testsuites>
+.venv/lib/python3.14/site-packages/requests/models.py:978: JSONDecodeError</failure></testcase><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_add_user[base_info2-testcase2]" time="0.007"><failure message="requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)">self = &lt;Response [500]&gt;, kwargs = {}
+
+    def json(self, **kwargs):
+        r"""Returns the json-encoded content of a response, if any.
+    
+        :param \*\*kwargs: Optional arguments that ``json.loads`` takes.
+        :raises requests.exceptions.JSONDecodeError: If the response body does not
+            contain valid json.
+        """
+    
+        if not self.encoding and self.content and len(self.content) &gt; 3:
+            # No encoding set. JSON RFC 4627 section 3 states we should expect
+            # UTF-8, -16 or -32. Detect which one to use; If the detection or
+            # decoding fails, fall back to `self.text` (using charset_normalizer to make
+            # a best guess).
+            encoding = guess_json_utf(self.content)
+            if encoding is not None:
+                try:
+                    return complexjson.loads(self.content.decode(encoding), **kwargs)
+                except UnicodeDecodeError:
+                    # Wrong UTF codec detected; usually because it's not UTF-8
+                    # but some other 8-bit codec.  This is an RFC violation,
+                    # and the server didn't bother to tell us what codec *was*
+                    # used.
+                    pass
+                except JSONDecodeError as e:
+                    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+    
+        try:
+&gt;           return complexjson.loads(self.text, **kwargs)
+
+.venv/lib/python3.14/site-packages/requests/models.py:974: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.14.0-macos-aarch64-none/lib/python3.14/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+../../.local/share/uv/python/cpython-3.14.0-macos-aarch64-none/lib/python3.14/json/decoder.py:345: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;json.decoder.JSONDecoder object at 0x10504ea50&gt;
+s = "&lt;!doctype html&gt;\n&lt;html lang=en&gt;\n  &lt;head&gt;\n    &lt;title&gt;FileNotFoundError: [Errno 2] No such file or directory: &amp;#39;.....^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '../data/mockdata/userManage.json'\n\n\n--&gt;\n"
+idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+&gt;           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+../../.local/share/uv/python/cpython-3.14.0-macos-aarch64-none/lib/python3.14/json/decoder.py:363: JSONDecodeError
+
+During handling of the above exception, another exception occurred:
+
+self = &lt;test_debug_api.TestUserManager object at 0x10c520180&gt;
+base_info = {'api_name': '新增用户', 'header': {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}, 'method': 'POST', 'url': '/dar/user/addUser'}
+testcase = {'data': {'dates': '2024-01-15', 'password': 'tset6789890', 'phone': 13900000002, 'role_id': 223456789, ...}}
+
+    @allure.story(next(c_id) + "新增用户")
+    # 测试用例执行顺序设置
+    @pytest.mark.run(order=1)
+    # 参数化，yaml数据驱动
+    @pytest.mark.parametrize('base_info,testcase', get_testcase_yaml("./testcase/Single interface/addUser.yaml"))
+    def test_add_user(self, base_info, testcase):
+        allure.dynamic.title(testcase['case_name'])
+&gt;       RequestBase().specification_yaml(base_info, testcase)
+
+testcase/Single interface/test_debug_api.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+base/apiutil.py:119: in specification_yaml
+    raise e
+base/apiutil.py:101: in specification_yaml
+    allure.attach(self.allure_attach_response(res.json()), '接口响应信息', allure.attachment_type.TEXT)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;Response [500]&gt;, kwargs = {}
+
+    def json(self, **kwargs):
+        r"""Returns the json-encoded content of a response, if any.
+    
+        :param \*\*kwargs: Optional arguments that ``json.loads`` takes.
+        :raises requests.exceptions.JSONDecodeError: If the response body does not
+            contain valid json.
+        """
+    
+        if not self.encoding and self.content and len(self.content) &gt; 3:
+            # No encoding set. JSON RFC 4627 section 3 states we should expect
+            # UTF-8, -16 or -32. Detect which one to use; If the detection or
+            # decoding fails, fall back to `self.text` (using charset_normalizer to make
+            # a best guess).
+            encoding = guess_json_utf(self.content)
+            if encoding is not None:
+                try:
+                    return complexjson.loads(self.content.decode(encoding), **kwargs)
+                except UnicodeDecodeError:
+                    # Wrong UTF codec detected; usually because it's not UTF-8
+                    # but some other 8-bit codec.  This is an RFC violation,
+                    # and the server didn't bother to tell us what codec *was*
+                    # used.
+                    pass
+                except JSONDecodeError as e:
+                    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+    
+        try:
+            return complexjson.loads(self.text, **kwargs)
+        except JSONDecodeError as e:
+            # Catch JSON-related errors and raise as requests.JSONDecodeError
+            # This aliases json.JSONDecodeError and simplejson.JSONDecodeError
+&gt;           raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+E           requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+.venv/lib/python3.14/site-packages/requests/models.py:978: JSONDecodeError</failure></testcase><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_add_user[base_info3-testcase3]" time="0.003" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_add_user[base_info4-testcase4]" time="0.006" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_add_user[base_info5-testcase5]" time="0.005" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_update_user[base_info0-testcase0]" time="0.004" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_delete_user[base_info0-testcase0]" time="0.004" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_delete_user[base_info1-testcase1]" time="0.004"><failure message="AssertionError">self = &lt;test_debug_api.TestUserManager object at 0x10c504950&gt;
+base_info = {'api_name': '删除用户', 'header': {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}, 'method': 'POST', 'url': '/dar/user/deleteUser'}
+testcase = {'data': {'user_id': 223839387391913}}
+
+    @allure.story(next(c_id) + "删除用户")
+    @pytest.mark.run(order=3)
+    @pytest.mark.parametrize('base_info,testcase', get_testcase_yaml("./testcase/Single interface/deleteUser.yaml"))
+    def test_delete_user(self, base_info, testcase):
+        allure.dynamic.title(testcase['case_name'])
+&gt;       RequestBase().specification_yaml(base_info, testcase)
+
+testcase/Single interface/test_debug_api.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+base/apiutil.py:119: in specification_yaml
+    raise e
+base/apiutil.py:116: in specification_yaml
+    raise e
+base/apiutil.py:110: in specification_yaml
+    self.asserts.assert_result(validation, res_json, status_code)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;common.assertions.Assertions object at 0x10cf7b520&gt;, expected = [{'contains': {'status_code': 200}}, {'contains': {'msg': '删除成功'}}]
+response = {'msg': '删除失败，用户id不存在!', 'msg_code': 9001}, status_code = 200
+
+    def assert_result(self, expected, response, status_code):
+        """
+        断言，通过断言all_flag标记，all_flag==0表示测试通过，否则为失败
+        :param expected: 预期结果
+        :param response: 实际响应结果
+        :param status_code: 响应code码
+        :return:
+        """
+        all_flag = 0
+        try:
+            logs.info("yaml文件预期结果：%s" % expected)
+            # logs.info("实际结果：%s" % response)
+            # all_flag = 0
+            for yq in expected:
+                for key, value in yq.items():
+                    if key == "contains":
+                        flag = self.contains_assert(value, response, status_code)
+                        all_flag = all_flag + flag
+                    elif key == "eq":
+                        flag = self.equal_assert(value, response)
+                        all_flag = all_flag + flag
+                    elif key == 'ne':
+                        flag = self.not_equal_assert(value, response)
+                        all_flag = all_flag + flag
+                    elif key == 'rv':
+                        flag = self.assert_response_any(actual_results=response, expected_results=value)
+                        all_flag = all_flag + flag
+                    elif key == 'db':
+                        flag = self.assert_mysql_data(value)
+                        all_flag = all_flag + flag
+                    else:
+                        logs.error("不支持此种断言方式")
+    
+        except Exception as exceptions:
+            logs.error('接口断言异常，请检查yaml预期结果值是否正确填写!')
+            raise exceptions
+    
+        if all_flag == 0:
+            logs.info("测试成功")
+            assert True
+        else:
+            logs.error("测试失败")
+&gt;           assert False
+E           AssertionError
+
+common/assertions.py:202: AssertionError</failure></testcase><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_delete_user[base_info2-testcase2]" time="0.005" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_delete_user[base_info3-testcase3]" time="0.004" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_delete_user[base_info4-testcase4]" time="0.004" /><testcase classname="testcase.Single interface.test_debug_api.TestUserManager" name="test_query_user[base_info0-testcase0]" time="0.005" /></testsuite></testsuites>
